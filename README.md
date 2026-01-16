@@ -5,8 +5,10 @@ Interactive mockup for the TenneT Managed Cloud Platform (MCP) "Prepare" phase o
 ## 🚀 Quick Start
 
 ### Option 1: StackBlitz (Instant Preview)
+
 Click this link after pushing to GitHub:
-```
+
+```sh
 https://stackblitz.com/github/YOUR_USERNAME/mcp-prepare-page
 ```
 
@@ -24,7 +26,7 @@ npm run dev
 
 ## 📁 Project Structure
 
-```
+```ini
 mcp-prepare-page/
 ├── src/
 │   ├── App.jsx          # Main React component
