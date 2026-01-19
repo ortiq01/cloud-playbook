@@ -8,22 +8,44 @@ import {
 } from 'lucide-react';
 
 export default function MCPPreparePage() {
+  const [activePhase, setActivePhase] = useState('prepare');
   const [activeRole, setActiveRole] = useState(null);
-  const [activeSection, setActiveSection] = useState('what-is-mcp');
-  const [checklist, setChecklist] = useState({
-    video: false,
-    standards: false,
-    training: false,
-    register: false
+  const defaultSectionByPhase = {
+    prepare: 'what-is-mcp',
+    plan: 'intake-requirements'
+  };
+  const [activeSection, setActiveSection] = useState(defaultSectionByPhase.prepare);
+  const [checklists, setChecklists] = useState({
+    prepare: {
+      video: false,
+      standards: false,
+      training: false,
+      register: false
+    },
+    plan: {
+      intakeKickoff: false,
+      classifyWorkload: false,
+      stakeholders: false,
+      appInventory: false,
+      readinessAssessment: false,
+      targetArchitecture: false,
+      wayOfWorking: false,
+      asaDraft: false
+    }
   });
 
+  const setPhase = (phaseId) => {
+    setActivePhase(phaseId);
+    setActiveSection(defaultSectionByPhase[phaseId] ?? defaultSectionByPhase.prepare);
+  };
+
   const phases = [
-    { id: 'prepare', name: 'Prepare', subtitle: 'Basecamp', icon: Compass, active: true },
-    { id: 'plan', name: '1. Plan', subtitle: 'Intake', icon: Target, active: false },
-    { id: 'build', name: '2. Build', subtitle: 'Design', icon: Settings, active: false },
-    { id: 'deliver', name: '3. Deliver', subtitle: 'Go-Live', icon: Rocket, active: false },
-    { id: 'run', name: '4. Run', subtitle: 'Operate', icon: Lightbulb, active: false }
-  ];
+    { id: 'prepare', name: 'Prepare', subtitle: 'Basecamp', icon: Compass },
+    { id: 'plan', name: '1. Plan', subtitle: 'Intake', icon: Target },
+    { id: 'build', name: '2. Build', subtitle: 'Design', icon: Settings },
+    { id: 'deliver', name: '3. Deliver', subtitle: 'Go-Live', icon: Rocket },
+    { id: 'run', name: '4. Run', subtitle: 'Operate', icon: Lightbulb }
+  ].map((p) => ({ ...p, active: p.id === activePhase }));
 
   const roles = [
     {
@@ -35,6 +57,7 @@ export default function MCPPreparePage() {
       bgColor: 'bg-blue-50',
       focus: ['Intake & ownership', 'Cost model & budgets', 'Operational readiness'],
       prepareTopics: ['What is MCP', 'Cost Management', 'Intake Process'],
+      planTopics: ['Intake Requirements', 'Readiness Assessment', 'ASA (Service Agreement)'],
       phases: ['Prepare', 'Plan', 'Run']
     },
     {
@@ -46,6 +69,7 @@ export default function MCPPreparePage() {
       bgColor: 'bg-emerald-50',
       focus: ['Solution design', 'NFRs & compliance', 'TenneT patterns'],
       prepareTopics: ['Cloud Playbook', 'Landing Zones', 'Security Standards'],
+      planTopics: ['Solution Design', 'NFRs & Compliance', 'Dependency Mapping'],
       phases: ['Prepare', 'Plan', 'Build']
     },
     {
@@ -57,88 +81,292 @@ export default function MCPPreparePage() {
       bgColor: 'bg-purple-50',
       focus: ['IaC & CI/CD', 'GitLab pipelines', 'Deployment patterns'],
       prepareTopics: ['GitLab Setup', 'Terraform Templates', 'Naming Conventions'],
+      planTopics: ['Inventory & Pipelines', 'Readiness Gaps', 'Observability Baseline'],
       phases: ['Prepare', 'Build', 'Deliver', 'Run']
     }
   ];
 
-  const sections = [
-    {
-      id: 'what-is-mcp',
-      title: 'What is MCP?',
-      icon: Play,
-      content: {
-        description: "Understanding 'What is Cloud' is like knowing the terrain before a hike. Just as hikers need to be aware of the landscape and conditions ahead, it's important to grasp the basics of cloud technology.",
-        keyPoints: [
-          'What the cloud is and how it differs from on-premises',
-          'Difference between public and private cloud',
-          'How MCP services support your workload',
-          'What the platform provides vs. what you own'
-        ],
-        hasVideo: true,
-        videoTitle: 'What is the cloud? An introduction to cloud computing with Microsoft Azure'
+  const phaseConfig = {
+    prepare: {
+      hero: {
+        phaseLabel: 'Phase 0 – Education & Enablement',
+        title: 'Prepare – Your Cloud Journey Starts Here',
+        subtitle: 'Build the right foundation. Understand our platform, learn the standards, and know what to expect.',
+        primaryCta: { label: "I'm new – show me around", icon: Play },
+        secondaryCta: { label: 'Skip to Phase 1: Plan', icon: ArrowRight, onClick: () => setPhase('plan') }
+      },
+      roleTipTitle: (roleTitle) => `Recommended for ${roleTitle}s in Prepare phase:`,
+      sections: [
+        {
+          id: 'what-is-mcp',
+          title: 'What is MCP?',
+          icon: Play,
+          content: {
+            description: "Understanding 'What is Cloud' is like knowing the terrain before a hike. Just as hikers need to be aware of the landscape and conditions ahead, it's important to grasp the basics of cloud technology.",
+            keyPoints: [
+              'What the cloud is and how it differs from on-premises',
+              'Difference between public and private cloud',
+              'How MCP services support your workload',
+              'What the platform provides vs. what you own'
+            ],
+            hasVideo: true,
+            videoTitle: 'What is the cloud? An introduction to cloud computing with Microsoft Azure'
+          }
+        },
+        {
+          id: 'mcp-organization',
+          title: 'How MCP is Organized',
+          icon: Users,
+          content: {
+            description: 'MCP operates through a partnership model with clear ownership and responsibilities across three key groups.',
+            keyPoints: [
+              'Platform Owner: BTO Operations, IIC Unit',
+              'Managed Cloud Provider: Capgemini (Azure & GitLab)',
+              'Enablement Team: Solutioning, coaching & onboarding'
+            ],
+            hasVideo: false
+          }
+        },
+        {
+          id: 'tennet-capgemini',
+          title: 'TenneT & Capgemini',
+          icon: Building2,
+          content: {
+            description: 'Our partnership with Capgemini delivers Azure and GitLab platform services while TenneT maintains strategic ownership and governance.',
+            keyPoints: [
+              'Capgemini: Platform operations & delivery',
+              'TenneT: Governance, architecture & standards',
+              'Enablement Team: Your bridge to both',
+              'Application Service Agreement (ASA): SLA Schedule & Pricing Annex',
+              'MCP TenneT and Capgemini contract – Formal contract between TenneT and Capgemini/Sogeti'
+            ],
+            hasVideo: false
+          }
+        },
+        {
+          id: 'education',
+          title: 'Cloud Education',
+          icon: GraduationCap,
+          content: {
+            description: 'Build your cloud capabilities through role-based training paths. We encourage certification to demonstrate knowledge and enhance your skills.',
+            keyPoints: [
+              'Enterprise Skilling Initiatives (ESI) platform',
+              'Role-based learning paths (AZ-900, AZ-104, AZ-305)',
+              'TenneT-specific patterns and standards training',
+              'Cloud Playbook deep-dives'
+            ],
+            hasVideo: false
+          }
+        }
+      ],
+      quickActions: [
+        { icon: FileText, label: 'Use Intake Form', desc: 'Start your registration', color: 'bg-blue-500' },
+        { icon: BookOpen, label: 'Cloud Playbook', desc: 'Core reference docs', color: 'bg-emerald-500' },
+        { icon: GraduationCap, label: 'Get Certified', desc: 'ESI training platform', color: 'bg-purple-500' },
+        { icon: Calendar, label: 'Book Office Hour', desc: 'Tuesdays at 14:00', color: 'bg-orange-500' }
+      ],
+      checklistTitle: 'Your Prepare Checklist',
+      checklistItems: [
+        { key: 'video', label: 'Watch "What is Cloud" video', time: '5 min' },
+        { key: 'standards', label: 'Review TenneT Cloud Standards', time: '15 min' },
+        { key: 'training', label: 'Complete role-specific training', time: '1-2 hrs' },
+        { key: 'register', label: 'Complete the Intake Form', time: '10 min' }
+      ],
+      readyCallout: {
+        title: 'Ready for Phase 1!',
+        buttonLabel: 'Start Plan Phase →',
+        onClick: () => setPhase('plan')
+      },
+      quickLinks: [
+        { icon: BookOpen, label: 'Inner Source Documentation', color: 'text-blue-600' },
+        { icon: FileText, label: 'Cloud Playbook', color: 'text-emerald-600' },
+        { icon: GraduationCap, label: 'ESI Training Portal', color: 'text-purple-600' },
+        { icon: GitBranch, label: 'GitLab Access Request', color: 'text-orange-600' },
+        { icon: DollarSign, label: 'Cost Management (FinOps)', color: 'text-green-600' },
+        { icon: Shield, label: 'Security & Compliance', color: 'text-red-600' }
+      ],
+      help: {
+        personName: 'Lara',
+        personSubtitle: 'Prepare & Run phases',
+        officeHours: 'Office Hours: Tuesdays 14:00',
+        teamsChannel: 'Teams: #mcp-enablement',
+        buttonLabel: 'Book a Session'
+      },
+      footer: {
+        title: 'Ready to move forward?',
+        subtitle: 'Complete your preparation and start the intake process.',
+        primaryLabel: 'Use Intake Form',
+        secondaryLabel: 'Go to Phase 1: Plan',
+        onSecondary: () => setPhase('plan')
       }
     },
-    {
-      id: 'mcp-organization',
-      title: 'How MCP is Organized',
-      icon: Users,
-      content: {
-        description: 'MCP operates through a partnership model with clear ownership and responsibilities across three key groups.',
-        keyPoints: [
-          'Platform Owner: BTO Operations, IIC Unit',
-          'Managed Cloud Provider: Capgemini (Azure & GitLab)',
-          'Enablement Team: Solutioning, coaching & onboarding'
-        ],
-        hasVideo: false
-      }
-    },
-    {
-      id: 'tennet-capgemini',
-      title: 'TenneT & Capgemini',
-      icon: Building2,
-      content: {
-        description: 'Our partnership with Capgemini delivers Azure and GitLab platform services while TenneT maintains strategic ownership and governance.',
-        keyPoints: [
-          'Capgemini: Platform operations & delivery',
-          'TenneT: Governance, architecture & standards',
-          'Enablement Team: Your bridge to both',
-          'Application Service Agreement (ASA): SLA Schedule & Pricing Annex',
-          'MCP TenneT and Capgemini contract – Formal contract between TenneT and Capgemini/Sogeti'
-        ],
-        hasVideo: false
-      }
-    },
-    {
-      id: 'education',
-      title: 'Cloud Education',
-      icon: GraduationCap,
-      content: {
-        description: 'Build your cloud capabilities through role-based training paths. We encourage certification to demonstrate knowledge and enhance your skills.',
-        keyPoints: [
-          'Enterprise Skilling Initiatives (ESI) platform',
-          'Role-based learning paths (AZ-900, AZ-104, AZ-305)',
-          'TenneT-specific patterns and standards training',
-          'Cloud Playbook deep-dives'
-        ],
-        hasVideo: false
+    plan: {
+      hero: {
+        phaseLabel: 'Phase 1 – Intake & Initial Solution Design',
+        title: '1. Plan – From Idea to a Build-Ready Plan',
+        subtitle: 'Capture requirements, assess readiness, align ways of working, and draft the ASA so Build can start smoothly.',
+        primaryCta: { label: 'Start Intake', icon: FileText },
+        secondaryCta: { label: 'Back to Prepare', icon: ArrowRight, onClick: () => setPhase('prepare') }
+      },
+      roleTipTitle: (roleTitle) => `Recommended for ${roleTitle}s in Plan phase:`,
+      sections: [
+        {
+          id: 'intake-requirements',
+          title: 'Intake Requirements',
+          icon: FileText,
+          content: {
+            description: 'Capture the minimum information needed to scope the onboarding, identify stakeholders, and define success for Build.',
+            keyPoints: [
+              'Workload overview: purpose, users, environments',
+              'Stakeholders & ownership: Product/Service owner, technical owner, security, operations',
+              'Dependencies: identity, networks, integrations, data flows',
+              'Constraints: timelines, blackout windows, vendor limitations'
+            ],
+            hasVideo: false
+          }
+        },
+        {
+          id: 'readiness-assessment',
+          title: 'Readiness Assessment',
+          icon: Shield,
+          content: {
+            description: 'Confirm prerequisites and surface gaps early: security/compliance, connectivity, tooling, and operational readiness.',
+            keyPoints: [
+              'Classification: data sensitivity and regulatory constraints',
+              'Prerequisites: identity, connectivity, landing zone alignment',
+              'Delivery readiness: CI/CD, IaC approach, environments',
+              'Risk register: gaps, owners, and remediation dates'
+            ],
+            hasVideo: false
+          }
+        },
+        {
+          id: 'way-of-working',
+          title: 'MCP Way of Working',
+          icon: Users,
+          content: {
+            description: 'Align ceremonies, decision points, and responsibilities so delivery is predictable and transparent.',
+            keyPoints: [
+              'Governance: decision makers, escalation, reporting cadence',
+              'RACI: who owns what across Plan/Build/Deliver/Run',
+              'Definition of Ready: what must be complete before Build',
+              'Change process: intake changes, approvals, and impact assessment'
+            ],
+            hasVideo: false
+          }
+        },
+        {
+          id: 'asa',
+          title: 'Application/Service Agreement (ASA)',
+          icon: Briefcase,
+          content: {
+            description: 'Draft the service agreement early: service boundaries, responsibilities, support model, and targets.',
+            keyPoints: [
+              'Service boundaries: what MCP provides vs what the team owns',
+              'Support model: hours, severity, on-call, handover criteria',
+              'Targets: SLOs/SLAs, RTO/RPO, availability expectations',
+              'Cost & transparency: showback/chargeback expectations'
+            ],
+            hasVideo: false
+          }
+        }
+      ],
+      quickActions: [
+        { icon: FileText, label: 'Start Intake', desc: 'Kickoff & scope', color: 'bg-blue-500' },
+        { icon: Shield, label: 'Readiness Check', desc: 'Find gaps early', color: 'bg-emerald-500' },
+        { icon: Building2, label: 'Solution Design', desc: 'Initial design review', color: 'bg-purple-500' },
+        { icon: Calendar, label: 'Plan Review', desc: 'Book a checkpoint', color: 'bg-orange-500' }
+      ],
+      checklistTitle: 'Your Plan Checklist',
+      checklistGroups: [
+        {
+          title: 'Intake Requirements',
+          items: [
+            { key: 'intakeKickoff', label: 'Schedule intake kickoff', time: '30 min' },
+            { key: 'stakeholders', label: 'Confirm stakeholders & ownership (RACI)', time: '20 min' },
+            { key: 'appInventory', label: 'Provide app inventory & dependencies', time: '45 min' }
+          ]
+        },
+        {
+          title: 'Readiness Assessment',
+          items: [
+            { key: 'classifyWorkload', label: 'Complete workload classification', time: '15 min' },
+            { key: 'readinessAssessment', label: 'Run readiness assessment & log gaps', time: '60 min' }
+          ]
+        },
+        {
+          title: 'Initial Solution Design',
+          items: [
+            { key: 'targetArchitecture', label: 'Agree initial target architecture', time: '60 min' }
+          ]
+        },
+        {
+          title: 'Way of Working & ASA',
+          items: [
+            { key: 'wayOfWorking', label: 'Align ceremonies & decision points', time: '30 min' },
+            { key: 'asaDraft', label: 'Draft ASA baseline (support + targets)', time: '45 min' }
+          ]
+        }
+      ],
+      readyCallout: {
+        title: 'Ready for Phase 2!',
+        buttonLabel: 'Continue to Build →',
+        onClick: () => setPhase('build')
+      },
+      quickLinks: [
+        { icon: FileText, label: 'Intake Template', color: 'text-blue-600' },
+        { icon: Shield, label: 'Readiness Checklist', color: 'text-emerald-600' },
+        { icon: Building2, label: 'Solution Design Guide', color: 'text-purple-600' },
+        { icon: Briefcase, label: 'ASA Template', color: 'text-orange-600' },
+        { icon: DollarSign, label: 'Cost Model (FinOps)', color: 'text-green-600' },
+        { icon: GitBranch, label: 'Repo / CI-CD Inputs', color: 'text-red-600' }
+      ],
+      help: {
+        personName: 'Kelsey',
+        personSubtitle: 'Plan phase – Intake & design',
+        officeHours: 'Office Hours: Thursdays 10:00',
+        teamsChannel: 'Teams: #mcp-plan-intake',
+        buttonLabel: 'Request Review'
+      },
+      footer: {
+        title: 'Build starts with a great Plan.',
+        subtitle: 'Finish the Plan checklist to hand over a complete Plan Pack to Build.',
+        primaryLabel: 'Generate Plan Pack',
+        secondaryLabel: 'Go to Phase 2: Build',
+        onSecondary: () => setPhase('build')
       }
     }
-  ];
-
-  const quickActions = [
-    { icon: FileText, label: 'Use Intake Form', desc: 'Start your registration', color: 'bg-blue-500' },
-    { icon: BookOpen, label: 'Cloud Playbook', desc: 'Core reference docs', color: 'bg-emerald-500' },
-    { icon: GraduationCap, label: 'Get Certified', desc: 'ESI training platform', color: 'bg-purple-500' },
-    { icon: Calendar, label: 'Book Office Hour', desc: 'Tuesdays at 14:00', color: 'bg-orange-500' }
-  ];
-
-  const toggleChecklistItem = (item) => {
-    setChecklist(prev => ({ ...prev, [item]: !prev[item] }));
   };
 
-  const completedItems = Object.values(checklist).filter(Boolean).length;
-  const totalItems = Object.keys(checklist).length;
+  const currentConfig = phaseConfig[activePhase] ?? phaseConfig.prepare;
+  const sections = currentConfig.sections;
+  const quickActions = currentConfig.quickActions;
+
+  const toggleChecklistItem = (itemKey) => {
+    setChecklists((prev) => ({
+      ...prev,
+      [activePhase]: {
+        ...(prev[activePhase] ?? {}),
+        [itemKey]: !(prev[activePhase]?.[itemKey])
+      }
+    }));
+  };
+
+  const checklist = checklists[activePhase] ?? {};
+
+  const getPhaseChecklistKeys = () => {
+    if (activePhase === 'prepare') return currentConfig.checklistItems.map(i => i.key);
+    if (activePhase === 'plan') return currentConfig.checklistGroups.flatMap(g => g.items.map(i => i.key));
+    return Object.keys(checklist);
+  };
+
+  const phaseChecklistKeys = getPhaseChecklistKeys();
+  const completedItems = phaseChecklistKeys.filter((k) => Boolean(checklist[k])).length;
+  const totalItems = Math.max(phaseChecklistKeys.length, 1);
   const selectedRole = roles.find(r => r.id === activeRole);
+  const selectedRoleTopics = selectedRole
+    ? (activePhase === 'plan' ? selectedRole.planTopics : selectedRole.prepareTopics)
+    : [];
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -160,25 +388,28 @@ export default function MCPPreparePage() {
         <div className="relative max-w-7xl mx-auto px-6 py-10">
           <div className="flex items-center gap-2 text-blue-300 text-sm mb-3">
             <Compass className="w-4 h-4" />
-            <span>Phase 0 – Education & Enablement</span>
+            <span>{currentConfig.hero.phaseLabel}</span>
           </div>
           
           <h1 className="text-3xl md:text-4xl font-bold mb-3">
-            Prepare – Your Cloud Journey Starts Here
+            {currentConfig.hero.title}
           </h1>
           
           <p className="text-lg text-blue-100 max-w-2xl mb-6">
-            Build the right foundation. Understand our platform, learn the standards, and know what to expect.
+            {currentConfig.hero.subtitle}
           </p>
 
           <div className="flex flex-wrap gap-3">
             <button className="bg-white text-slate-800 px-5 py-2.5 rounded-lg font-semibold flex items-center gap-2 hover:bg-blue-50 transition-colors text-sm">
-              <Play className="w-4 h-4" />
-              I'm new – show me around
+              {React.createElement(currentConfig.hero.primaryCta.icon, { className: 'w-4 h-4' })}
+              {currentConfig.hero.primaryCta.label}
             </button>
-            <button className="bg-white/10 backdrop-blur-sm border border-white/20 px-5 py-2.5 rounded-lg font-semibold flex items-center gap-2 hover:bg-white/20 transition-colors text-sm">
-              <ArrowRight className="w-4 h-4" />
-              Skip to Phase 1: Plan
+            <button
+              onClick={currentConfig.hero.secondaryCta.onClick}
+              className="bg-white/10 backdrop-blur-sm border border-white/20 px-5 py-2.5 rounded-lg font-semibold flex items-center gap-2 hover:bg-white/20 transition-colors text-sm"
+            >
+              {React.createElement(currentConfig.hero.secondaryCta.icon, { className: 'w-4 h-4' })}
+              {currentConfig.hero.secondaryCta.label}
             </button>
           </div>
         </div>
@@ -193,6 +424,7 @@ export default function MCPPreparePage() {
               return (
                 <React.Fragment key={phase.id}>
                   <button
+                    onClick={() => setPhase(phase.id)}
                     className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all whitespace-nowrap ${
                       phase.active 
                         ? 'bg-blue-600 text-white shadow-lg shadow-blue-200' 
@@ -299,10 +531,10 @@ export default function MCPPreparePage() {
                 <Lightbulb className="w-5 h-5 text-gray-600 mt-0.5 flex-shrink-0" />
                 <div className="flex-1">
                   <div className="font-semibold text-gray-800 text-sm mb-2">
-                    Recommended for {selectedRole.title}s in Prepare phase:
+                    {currentConfig.roleTipTitle(selectedRole.title)}
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    {selectedRole.prepareTopics.map((topic, i) => (
+                    {selectedRoleTopics.map((topic, i) => (
                       <span key={i} className="bg-white px-3 py-1 rounded-full text-sm text-gray-700 border shadow-sm">{topic}</span>
                     ))}
                   </div>
@@ -401,7 +633,7 @@ export default function MCPPreparePage() {
           {/* Progress Checklist */}
           <div className="bg-white rounded-xl shadow-sm border p-5">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="font-bold text-gray-800 text-sm">Your Prepare Checklist</h3>
+              <h3 className="font-bold text-gray-800 text-sm">{currentConfig.checklistTitle}</h3>
               <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full font-medium">
                 {completedItems}/{totalItems}
               </span>
@@ -415,43 +647,77 @@ export default function MCPPreparePage() {
             </div>
 
             <div className="space-y-2">
-              {[
-                { key: 'video', label: 'Watch "What is Cloud" video', time: '5 min' },
-                { key: 'standards', label: 'Review TenneT Cloud Standards', time: '15 min' },
-                { key: 'training', label: 'Complete role-specific training', time: '1-2 hrs' },
-                { key: 'register', label: 'Complete the Intake Form', time: '10 min' }
-              ].map((item) => (
-                <button
-                  key={item.key}
-                  onClick={() => toggleChecklistItem(item.key)}
-                  className="w-full flex items-center gap-2.5 p-2.5 rounded-lg hover:bg-gray-50 transition-colors text-left"
-                >
-                  {checklist[item.key] ? (
-                    <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
-                  ) : (
-                    <Circle className="w-5 h-5 text-gray-300 flex-shrink-0" />
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <div className={`text-sm font-medium truncate ${checklist[item.key] ? 'text-gray-400 line-through' : 'text-gray-700'}`}>
-                      {item.label}
+              {activePhase === 'plan' ? (
+                <div className="space-y-4">
+                  {currentConfig.checklistGroups.map((group) => (
+                    <div key={group.title}>
+                      <div className="text-xs font-semibold text-gray-500 uppercase tracking-wide mb-2">
+                        {group.title}
+                      </div>
+                      <div className="space-y-2">
+                        {group.items.map((item) => (
+                          <button
+                            key={item.key}
+                            onClick={() => toggleChecklistItem(item.key)}
+                            className="w-full flex items-center gap-2.5 p-2.5 rounded-lg hover:bg-gray-50 transition-colors text-left"
+                          >
+                            {checklist[item.key] ? (
+                              <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                            ) : (
+                              <Circle className="w-5 h-5 text-gray-300 flex-shrink-0" />
+                            )}
+                            <div className="flex-1 min-w-0">
+                              <div className={`text-sm font-medium truncate ${checklist[item.key] ? 'text-gray-400 line-through' : 'text-gray-700'}`}>
+                                {item.label}
+                              </div>
+                              <div className="text-xs text-gray-400 flex items-center gap-1">
+                                <Clock className="w-3 h-3" />
+                                {item.time}
+                              </div>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
                     </div>
-                    <div className="text-xs text-gray-400 flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      {item.time}
+                  ))}
+                </div>
+              ) : (
+                currentConfig.checklistItems.map((item) => (
+                  <button
+                    key={item.key}
+                    onClick={() => toggleChecklistItem(item.key)}
+                    className="w-full flex items-center gap-2.5 p-2.5 rounded-lg hover:bg-gray-50 transition-colors text-left"
+                  >
+                    {checklist[item.key] ? (
+                      <CheckCircle2 className="w-5 h-5 text-green-500 flex-shrink-0" />
+                    ) : (
+                      <Circle className="w-5 h-5 text-gray-300 flex-shrink-0" />
+                    )}
+                    <div className="flex-1 min-w-0">
+                      <div className={`text-sm font-medium truncate ${checklist[item.key] ? 'text-gray-400 line-through' : 'text-gray-700'}`}>
+                        {item.label}
+                      </div>
+                      <div className="text-xs text-gray-400 flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {item.time}
+                      </div>
                     </div>
-                  </div>
-                </button>
-              ))}
+                  </button>
+                ))
+              )}
             </div>
 
             {completedItems === totalItems && (
               <div className="mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
                 <div className="flex items-center gap-2 text-green-700 font-semibold text-sm mb-2">
                   <Rocket className="w-4 h-4" />
-                  Ready for Phase 1!
+                  {currentConfig.readyCallout.title}
                 </div>
-                <button className="w-full bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition-colors text-sm">
-                  Start Plan Phase →
+                <button
+                  onClick={currentConfig.readyCallout.onClick}
+                  className="w-full bg-green-600 text-white py-2 rounded-lg font-medium hover:bg-green-700 transition-colors text-sm"
+                >
+                  {currentConfig.readyCallout.buttonLabel}
                 </button>
               </div>
             )}
@@ -461,14 +727,7 @@ export default function MCPPreparePage() {
           <div className="bg-white rounded-xl shadow-sm border p-5">
             <h3 className="font-bold text-gray-800 text-sm mb-3">Quick Links</h3>
             <div className="space-y-1">
-              {[
-                { icon: BookOpen, label: 'Inner Source Documentation', color: 'text-blue-600' },
-                { icon: FileText, label: 'Cloud Playbook', color: 'text-emerald-600' },
-                { icon: GraduationCap, label: 'ESI Training Portal', color: 'text-purple-600' },
-                { icon: GitBranch, label: 'GitLab Access Request', color: 'text-orange-600' },
-                { icon: DollarSign, label: 'Cost Management (FinOps)', color: 'text-green-600' },
-                { icon: Shield, label: 'Security & Compliance', color: 'text-red-600' }
-              ].map((link, i) => {
+              {currentConfig.quickLinks.map((link, i) => {
                 const LinkIcon = link.icon;
                 return (
                   <button
@@ -497,23 +756,23 @@ export default function MCPPreparePage() {
                   <User className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="font-semibold text-sm">Lara</div>
-                  <div className="text-xs text-blue-200">Prepare & Run phases</div>
+                  <div className="font-semibold text-sm">{currentConfig.help.personName}</div>
+                  <div className="text-xs text-blue-200">{currentConfig.help.personSubtitle}</div>
                 </div>
               </div>
 
               <div className="flex items-center gap-2 text-xs">
                 <Calendar className="w-3.5 h-3.5" />
-                <span>Office Hours: Tuesdays 14:00</span>
+                <span>{currentConfig.help.officeHours}</span>
               </div>
               
               <div className="flex items-center gap-2 text-xs">
                 <MessageSquare className="w-3.5 h-3.5" />
-                <span>Teams: #mcp-enablement</span>
+                <span>{currentConfig.help.teamsChannel}</span>
               </div>
 
               <button className="w-full bg-white text-blue-700 py-2 rounded-lg font-medium hover:bg-blue-50 transition-colors text-sm">
-                Book a Session
+                {currentConfig.help.buttonLabel}
               </button>
             </div>
           </div>
@@ -525,15 +784,18 @@ export default function MCPPreparePage() {
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <div>
-              <h2 className="text-xl font-bold mb-1">Ready to move forward?</h2>
-              <p className="text-gray-300 text-sm">Complete your preparation and start the intake process.</p>
+              <h2 className="text-xl font-bold mb-1">{currentConfig.footer.title}</h2>
+              <p className="text-gray-300 text-sm">{currentConfig.footer.subtitle}</p>
             </div>
             <div className="flex gap-3">
               <button className="bg-white text-gray-800 px-5 py-2.5 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm">
-                Use Intake Form
+                {currentConfig.footer.primaryLabel}
               </button>
-              <button className="bg-blue-600 text-white px-5 py-2.5 rounded-lg font-semibold flex items-center gap-2 hover:bg-blue-700 transition-colors text-sm">
-                Go to Phase 1: Plan
+              <button
+                onClick={currentConfig.footer.onSecondary}
+                className="bg-blue-600 text-white px-5 py-2.5 rounded-lg font-semibold flex items-center gap-2 hover:bg-blue-700 transition-colors text-sm"
+              >
+                {currentConfig.footer.secondaryLabel}
                 <ArrowRight className="w-4 h-4" />
               </button>
             </div>

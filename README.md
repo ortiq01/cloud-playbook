@@ -4,12 +4,12 @@ Interactive mockup for the TenneT Managed Cloud Platform (MCP) "Prepare" phase o
 
 ## 🚀 Quick Start
 
-### Option 1: StackBlitz (Instant Preview)
+### Option 1: GitHub Pages (External Link)
 
-Click this link after pushing to GitHub:
+This repo deploys automatically to GitHub Pages on every push to the `main` branch.
 
 ```sh
-https://stackblitz.com/github/YOUR_USERNAME/mcp-prepare-page
+https://ortiq01.github.io/cloud-playbook/
 ```
 
 ### Option 2: Local Development
