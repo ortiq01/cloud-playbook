@@ -4,7 +4,7 @@ import {
   CheckCircle2, Circle, ExternalLink, Calendar, MessageSquare,
   Briefcase, Building2, Code, FileText, Settings, DollarSign,
   Shield, GitBranch, ArrowRight, Clock, User, HelpCircle,
-  Compass, Target, Lightbulb, Rocket
+  Compass, Target, Lightbulb, Rocket, Ticket
 } from 'lucide-react';
 
 export default function MCPPreparePage() {
@@ -85,37 +85,22 @@ export default function MCPPreparePage() {
       buildTopics: ['Plan Pack review', 'Go-live criteria', 'Operational handover prep'],
       deliverTopics: ['CAB / Change record', 'Go-live checklist', 'Operational handover'],
       runTopics: ['Service ownership', 'On-call & support', 'FinOps & reporting'],
-      phases: ['Prepare', 'Plan', 'Run']
+      phases: ['Prepare', 'Plan', 'Build', 'Deliver', 'Run']
     },
     {
-      id: 'architect',
-      title: 'Architect',
-      icon: Building2,
-      color: 'from-emerald-500 to-emerald-600',
+      id: 'archdev',
+      title: 'Architect / Developer',
+      icon: Code,
+      color: 'from-emerald-500 to-purple-600',
       borderColor: 'border-emerald-500',
       bgColor: 'bg-emerald-50',
-      focus: ['Solution design', 'NFRs & compliance', 'TenneT patterns'],
-      prepareTopics: ['Cloud Playbook', 'Landing Zones', 'Security Standards'],
-      planTopics: ['Solution Design', 'NFRs & Compliance', 'Dependency Mapping'],
-      buildTopics: ['Architecture sign-off', 'Security controls', 'Operational NFRs'],
-      deliverTopics: ['Change impact & risk', 'Cutover/rollback plan', 'Handover completeness'],
-      runTopics: ['Continuous improvement', 'Problem management', 'Resilience review'],
-      phases: ['Prepare', 'Plan', 'Build']
-    },
-    {
-      id: 'devops',
-      title: 'DevOps / Engineer',
-      icon: Code,
-      color: 'from-purple-500 to-purple-600',
-      borderColor: 'border-purple-500',
-      bgColor: 'bg-purple-50',
-      focus: ['IaC & CI/CD', 'GitLab pipelines', 'Deployment patterns'],
-      prepareTopics: ['GitLab Setup', 'Terraform Templates', 'Naming Conventions'],
-      planTopics: ['Inventory & Pipelines', 'Readiness Gaps', 'Observability Baseline'],
-      buildTopics: ['Deployment readiness', 'Observability baseline', 'Release approach'],
-      deliverTopics: ['Cutover execution', 'Rollback readiness', 'Operational handover'],
+      focus: ['Solution design', 'CI/CD & IaC', 'NFRs & compliance'],
+      prepareTopics: ['Cloud Playbook', 'Landing Zones', 'GitLab & IaC basics'],
+      planTopics: ['Solution Design', 'Dependencies', 'Observability Baseline'],
+      buildTopics: ['Architecture sign-off', 'Deployment readiness', 'Security controls'],
+      deliverTopics: ['Cutover/rollback plan', 'Risk & change impact', 'Handover completeness'],
       runTopics: ['Monitoring & alerting', 'Incident response', 'Runbook maintenance'],
-      phases: ['Prepare', 'Build', 'Deliver', 'Run']
+      phases: ['Prepare', 'Plan', 'Build', 'Deliver', 'Run']
     }
   ];
 
@@ -217,6 +202,11 @@ export default function MCPPreparePage() {
         { icon: GitBranch, label: 'GitLab Access Request', color: 'text-orange-600' },
         { icon: DollarSign, label: 'Cost Management (FinOps)', color: 'text-green-600' },
         { icon: Shield, label: 'Security & Compliance', color: 'text-red-600' }
+      ],
+      topdeskRequests: [
+        { label: 'Request GitLab access', desc: 'User onboarding / permissions' },
+        { label: 'Request subscription / landing zone', desc: 'If needed for onboarding' },
+        { label: 'Request security onboarding', desc: 'Access + policy alignment' }
       ],
       help: {
         personName: 'Lara',
@@ -354,6 +344,11 @@ export default function MCPPreparePage() {
         { icon: DollarSign, label: 'Cost Model (FinOps)', color: 'text-green-600' },
         { icon: GitBranch, label: 'Repo / CI-CD Inputs', color: 'text-red-600' }
       ],
+      topdeskRequests: [
+        { label: 'Intake registration ticket', desc: 'Start the onboarding workflow' },
+        { label: 'Stakeholder / access requests', desc: 'Groups, contacts, approvals' },
+        { label: 'Architecture / review request', desc: 'If formal review is needed' }
+      ],
       help: {
         personName: 'Kelsey',
         personSubtitle: 'Plan phase – Intake & design',
@@ -465,6 +460,11 @@ export default function MCPPreparePage() {
         { icon: MessageSquare, label: 'Observability standards', color: 'text-purple-600' },
         { icon: FileText, label: 'Operational handover template', color: 'text-orange-600' },
         { icon: DollarSign, label: 'FinOps essentials', color: 'text-green-600' }
+      ],
+      topdeskRequests: [
+        { label: 'Security control validation', desc: 'Evidence / sign-off support' },
+        { label: 'Release readiness review', desc: 'Confirm go-live gate' },
+        { label: 'Observability setup request', desc: 'Dashboards / alert routing' }
       ],
       help: {
         personName: 'MCP Enablement',
@@ -597,6 +597,12 @@ export default function MCPPreparePage() {
         { icon: Settings, label: 'Run access (RBAC) request', color: 'text-orange-600' },
         { icon: MessageSquare, label: 'Closing email template', color: 'text-green-600' }
       ],
+      topdeskRequests: [
+        { label: 'Raise change request', desc: 'Schedule window + rollback' },
+        { label: 'Request Run access (RBAC)', desc: 'Ops groups and permissions' },
+        { label: 'Engage OSM (hand-to-run)', desc: 'Confirm support model' },
+        { label: 'DA approval request', desc: 'If required by governance' }
+      ],
       help: {
         personName: 'MCP Enablement',
         personSubtitle: 'Deliver phase – Go-Live & handover',
@@ -708,6 +714,11 @@ export default function MCPPreparePage() {
         { icon: FileText, label: 'Runbook templates', color: 'text-blue-600' },
         { icon: Users, label: 'Support model & RACI', color: 'text-emerald-600' },
         { icon: Target, label: 'Service review checklist', color: 'text-orange-600' }
+      ],
+      topdeskRequests: [
+        { label: 'On-call group setup', desc: 'Escalation + notifications' },
+        { label: 'Monitoring/alert tuning request', desc: 'Reduce noise, improve signal' },
+        { label: 'Operational access change', desc: 'RBAC adjustments over time' }
       ],
       help: {
         personName: 'MCP Enablement',
@@ -922,19 +933,42 @@ export default function MCPPreparePage() {
           </div>
 
           {selectedRole && (
-            <div className={`mt-4 p-4 rounded-xl border ${selectedRole.bgColor} ${selectedRole.borderColor} border-opacity-30`}>
-              <div className="flex items-start gap-3">
-                <Lightbulb className="w-5 h-5 text-gray-600 mt-0.5 flex-shrink-0" />
-                <div className="flex-1">
-                  <div className="font-semibold text-gray-800 text-sm mb-2">
-                    {currentConfig.roleTipTitle(selectedRole.title)}
+            <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+              <div className={`p-4 rounded-xl border ${selectedRole.bgColor} ${selectedRole.borderColor} border-opacity-30`}>
+                <div className="flex items-start gap-3">
+                  <Lightbulb className="w-5 h-5 text-gray-600 mt-0.5 flex-shrink-0" />
+                  <div className="flex-1">
+                    <div className="font-semibold text-gray-800 text-sm mb-2">
+                      {currentConfig.roleTipTitle(selectedRole.title)}
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {selectedRoleTopics.map((topic, i) => (
+                        <span key={i} className="bg-white px-3 py-1 rounded-full text-sm text-gray-700 border shadow-sm">{topic}</span>
+                      ))}
+                    </div>
+                    <div className="mt-2 text-xs text-gray-500">Active phases: {selectedRole.phases.join(' → ')}</div>
                   </div>
-                  <div className="flex flex-wrap gap-2">
-                    {selectedRoleTopics.map((topic, i) => (
-                      <span key={i} className="bg-white px-3 py-1 rounded-full text-sm text-gray-700 border shadow-sm">{topic}</span>
-                    ))}
+                </div>
+              </div>
+
+              <div className="p-4 rounded-xl border bg-white">
+                <div className="flex items-start gap-3">
+                  <Ticket className="w-5 h-5 text-gray-600 mt-0.5 flex-shrink-0" />
+                  <div className="flex-1">
+                    <div className="font-semibold text-gray-800 text-sm mb-2">Topdesk requests</div>
+                    <div className="space-y-2">
+                      {(currentConfig.topdeskRequests ?? []).length > 0 ? (
+                        (currentConfig.topdeskRequests ?? []).map((req, i) => (
+                          <div key={i} className="bg-gray-50 border rounded-lg px-3 py-2">
+                            <div className="text-sm font-medium text-gray-800">{req.label}</div>
+                            {req.desc && <div className="text-xs text-gray-500">{req.desc}</div>}
+                          </div>
+                        ))
+                      ) : (
+                        <div className="text-sm text-gray-500">No Topdesk requests for this phase.</div>
+                      )}
+                    </div>
                   </div>
-                  <div className="mt-2 text-xs text-gray-500">Active phases: {selectedRole.phases.join(' → ')}</div>
                 </div>
               </div>
             </div>
