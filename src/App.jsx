@@ -487,13 +487,13 @@ export default function MCPPreparePage() {
             </div>
 
             <div className="lg:col-span-1 lg:flex lg:justify-end">
-              <div className="w-full lg:max-w-md">
+              <div className="w-full lg:max-w-md flex flex-col justify-center">
                 <div className="flex items-center justify-between gap-3">
                   <div className="flex items-center gap-2">
                     <HelpCircle className="w-4 h-4 text-blue-200" />
                     <div className="font-semibold text-sm">Need Help?</div>
                   </div>
-                  <button className="bg-white text-gray-800 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm whitespace-nowrap">
+                  <button className="bg-white text-gray-800 px-5 py-2.5 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm whitespace-nowrap">
                     {currentConfig.help.buttonLabel}
                   </button>
                 </div>
