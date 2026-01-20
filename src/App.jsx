@@ -1179,8 +1179,21 @@ export default function MCPPreparePage() {
               <p className="text-gray-300 text-sm">{currentConfig.footer.subtitle}</p>
             </div>
 
-            <div className="lg:col-span-1">
-              <div className="bg-white/10 border border-white/10 rounded-xl p-4">
+            <div className="lg:col-span-1 flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3 justify-start lg:justify-center">
+              <button className="bg-white text-gray-800 px-5 py-2.5 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm">
+                {currentConfig.footer.primaryLabel}
+              </button>
+              <button
+                onClick={currentConfig.footer.onSecondary}
+                className="bg-blue-600 text-white px-5 py-2.5 rounded-lg font-semibold flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors text-sm"
+              >
+                {currentConfig.footer.secondaryLabel}
+                <ArrowRight className="w-4 h-4" />
+              </button>
+            </div>
+
+            <div className="lg:col-span-1 lg:flex lg:justify-end">
+              <div className="bg-white/10 border border-white/10 rounded-xl p-4 w-full lg:max-w-md">
                 <div className="flex items-center gap-2 mb-3">
                   <HelpCircle className="w-4 h-4 text-blue-200" />
                   <h3 className="font-bold text-sm">Need Help?</h3>
@@ -1213,19 +1226,6 @@ export default function MCPPreparePage() {
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="lg:col-span-1 flex flex-col sm:flex-row lg:flex-col xl:flex-row gap-3 justify-end">
-              <button className="bg-white text-gray-800 px-5 py-2.5 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm">
-                {currentConfig.footer.primaryLabel}
-              </button>
-              <button
-                onClick={currentConfig.footer.onSecondary}
-                className="bg-blue-600 text-white px-5 py-2.5 rounded-lg font-semibold flex items-center justify-center gap-2 hover:bg-blue-700 transition-colors text-sm"
-              >
-                {currentConfig.footer.secondaryLabel}
-                <ArrowRight className="w-4 h-4" />
-              </button>
             </div>
           </div>
         </div>
