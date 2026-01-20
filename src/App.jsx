@@ -1211,16 +1211,6 @@ export default function MCPPreparePage() {
                   <div className="min-w-0">
                     <div className="font-semibold text-sm truncate">{currentConfig.help.personName}</div>
                     <div className="text-xs text-gray-300 truncate">{currentConfig.help.personSubtitle}</div>
-                    <div className="mt-2 flex flex-col sm:flex-row gap-2 sm:gap-4 text-xs text-gray-200">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-3.5 h-3.5" />
-                        <span>{currentConfig.help.officeHours}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <MessageSquare className="w-3.5 h-3.5" />
-                        <span>{currentConfig.help.teamsChannel}</span>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </div>
