@@ -1193,36 +1193,34 @@ export default function MCPPreparePage() {
             </div>
 
             <div className="lg:col-span-1 lg:flex lg:justify-end">
-              <div className="bg-white/10 border border-white/10 rounded-xl p-4 w-full lg:max-w-md">
-                <div className="flex items-center gap-2 mb-3">
-                  <HelpCircle className="w-4 h-4 text-blue-200" />
-                  <h3 className="font-bold text-sm">Need Help?</h3>
-                </div>
-
-                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <div className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center">
-                      <User className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <div className="font-semibold text-sm">{currentConfig.help.personName}</div>
-                      <div className="text-xs text-gray-300">{currentConfig.help.personSubtitle}</div>
-                    </div>
+              <div className="w-full lg:max-w-md">
+                <div className="flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2">
+                    <HelpCircle className="w-4 h-4 text-blue-200" />
+                    <div className="font-semibold text-sm">Need Help?</div>
                   </div>
-
                   <button className="bg-white text-gray-800 px-4 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors text-sm whitespace-nowrap">
                     {currentConfig.help.buttonLabel}
                   </button>
                 </div>
 
-                <div className="mt-3 flex flex-col sm:flex-row gap-2 sm:gap-4 text-xs text-gray-200">
-                  <div className="flex items-center gap-2">
-                    <Calendar className="w-3.5 h-3.5" />
-                    <span>{currentConfig.help.officeHours}</span>
+                <div className="mt-3 flex items-start gap-3">
+                  <div className="w-9 h-9 bg-white/10 rounded-full flex items-center justify-center flex-shrink-0">
+                    <User className="w-4 h-4" />
                   </div>
-                  <div className="flex items-center gap-2">
-                    <MessageSquare className="w-3.5 h-3.5" />
-                    <span>{currentConfig.help.teamsChannel}</span>
+                  <div className="min-w-0">
+                    <div className="font-semibold text-sm truncate">{currentConfig.help.personName}</div>
+                    <div className="text-xs text-gray-300 truncate">{currentConfig.help.personSubtitle}</div>
+                    <div className="mt-2 flex flex-col sm:flex-row gap-2 sm:gap-4 text-xs text-gray-200">
+                      <div className="flex items-center gap-2">
+                        <Calendar className="w-3.5 h-3.5" />
+                        <span>{currentConfig.help.officeHours}</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <MessageSquare className="w-3.5 h-3.5" />
+                        <span>{currentConfig.help.teamsChannel}</span>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
