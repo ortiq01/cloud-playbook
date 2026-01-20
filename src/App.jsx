@@ -42,11 +42,13 @@ export default function MCPPreparePage() {
       observabilityBaseline: false
     },
     deliver: {
-      goLiveChecklist: false,
-      changeRecordReady: false,
-      cabSecurityApproved: false,
-      cutoverRollbackPlan: false,
-      operationalHandover: false
+      vulnerabilitiesResolved: false,
+      osmEngaged: false,
+      asaConfirmed: false,
+      changeRequestRaised: false,
+      daApproved: false,
+      runAccessRbac: false,
+      closingEmailSent: false
     },
     run: {
       onCallReady: false,
@@ -520,6 +522,21 @@ export default function MCPPreparePage() {
           }
         },
         {
+          id: 'da-approval',
+          title: 'Design Authority (DA) Approval',
+          icon: Target,
+          content: {
+            description: 'Make sure the required DA approval is obtained before the go-live window (scope depends on workload criticality).',
+            keyPoints: [
+              'Approval request includes scope, architecture summary, and key risks',
+              'Decision and conditions are captured and shared',
+              'Any conditions are translated into actionable items',
+              'Approval evidence is linked from the change request'
+            ],
+            hasVideo: false
+          }
+        },
+        {
           id: 'cutover',
           title: 'Cutover & Rollback Plan',
           icon: ArrowRight,
@@ -544,25 +561,28 @@ export default function MCPPreparePage() {
               'Runbooks and support model are available and current',
               'SLAs / ASA expectations are understood',
               'Monitoring ownership and alert routing is agreed',
-              'Post go-live follow-ups are scheduled'
+              'Run access is granted (RBAC) for the right groups',
+              'Post go-live follow-ups are scheduled and a closing email is sent'
             ],
             hasVideo: false
           }
         }
       ],
       quickActions: [
-        { icon: FileText, label: 'Change Record', desc: 'Prepare CAB evidence', color: 'bg-blue-500' },
-        { icon: Calendar, label: 'Schedule CAB', desc: 'Pick the window', color: 'bg-emerald-500' },
-        { icon: Shield, label: 'Security Review', desc: 'Approval inputs', color: 'bg-purple-500' },
-        { icon: Users, label: 'Handover Pack', desc: 'Ops-ready docs', color: 'bg-orange-500' }
+        { icon: Shield, label: 'Vulnerabilities', desc: 'Infra + App remediated', color: 'bg-blue-500' },
+        { icon: Users, label: 'Engage OSM', desc: 'Align hand-to-run', color: 'bg-emerald-500' },
+        { icon: FileText, label: 'ASA + Change', desc: 'ASA + change request', color: 'bg-purple-500' },
+        { icon: Settings, label: 'Run Access', desc: 'RBAC to operate', color: 'bg-orange-500' }
       ],
       checklistTitle: 'Your Deliver Checklist',
       checklistItems: [
-        { key: 'goLiveChecklist', label: 'Go-Live checklist complete', time: '20–40 min' },
-        { key: 'changeRecordReady', label: 'Change record ready (scope, impact, rollback)', time: '30–60 min' },
-        { key: 'cabSecurityApproved', label: 'CAB / security approvals completed', time: 'Varies' },
-        { key: 'cutoverRollbackPlan', label: 'Cutover + rollback plan reviewed', time: '30–60 min' },
-        { key: 'operationalHandover', label: 'Operational handover done', time: '30–60 min' }
+        { key: 'vulnerabilitiesResolved', label: 'Vulnerabilities resolved (infra + app)', time: 'Varies' },
+        { key: 'osmEngaged', label: 'OSM engaged for hand-to-run', time: '15–30 min' },
+        { key: 'asaConfirmed', label: 'Application Service Agreement (ASA) confirmed', time: '20–40 min' },
+        { key: 'changeRequestRaised', label: 'Change request raised (scope, impact, rollback)', time: '30–60 min' },
+        { key: 'daApproved', label: 'DA approval obtained', time: 'Varies' },
+        { key: 'runAccessRbac', label: 'Run access granted (RBAC)', time: '10–20 min' },
+        { key: 'closingEmailSent', label: 'Closing email sent (handover complete)', time: '5–10 min' }
       ],
       readyCallout: {
         title: 'Go-Live Complete!',
@@ -570,12 +590,12 @@ export default function MCPPreparePage() {
         onClick: () => setPhase('run')
       },
       quickLinks: [
-        { icon: FileText, label: 'Go-Live checklist', color: 'text-blue-600' },
-        { icon: Shield, label: 'CAB / security evidence list', color: 'text-red-600' },
-        { icon: Users, label: 'Operational handover template', color: 'text-emerald-600' },
-        { icon: MessageSquare, label: 'Go-Live comms template', color: 'text-purple-600' },
-        { icon: Clock, label: 'Cutover window guidance', color: 'text-orange-600' },
-        { icon: DollarSign, label: 'Cost baseline (FinOps)', color: 'text-green-600' }
+        { icon: Shield, label: 'Vulnerability remediation checklist', color: 'text-red-600' },
+        { icon: Users, label: 'OSM hand-to-run guidance', color: 'text-emerald-600' },
+        { icon: FileText, label: 'ASA template / checklist', color: 'text-blue-600' },
+        { icon: Target, label: 'DA approval request template', color: 'text-purple-600' },
+        { icon: Settings, label: 'Run access (RBAC) request', color: 'text-orange-600' },
+        { icon: MessageSquare, label: 'Closing email template', color: 'text-green-600' }
       ],
       help: {
         personName: 'MCP Enablement',
