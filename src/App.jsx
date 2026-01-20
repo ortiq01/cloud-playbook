@@ -114,23 +114,23 @@ export default function MCPPreparePage() {
       {/* Journey Stepper */}
       <div className="bg-white border-b shadow-sm sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-6 py-3">
-          <div className="flex items-center gap-1 md:gap-2 overflow-x-auto">
+          <div className="flex items-center gap-2 overflow-x-auto md:overflow-visible md:justify-between">
             {phases.map((phase, index) => {
               const Icon = phase.icon;
               return (
                 <React.Fragment key={phase.id}>
                   <button
                     onClick={() => setPhase(phase.id)}
-                    className={`flex items-center gap-2 px-3 py-2 rounded-lg transition-all whitespace-nowrap ${
+                    className={`flex items-center gap-3 px-4 py-3 md:flex-1 md:min-w-0 md:px-5 md:py-3.5 rounded-xl transition-all min-w-[220px] ${
                       phase.active 
                         ? 'bg-blue-600 text-white shadow-lg shadow-blue-200' 
                         : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                     }`}
                   >
-                    <Icon className="w-4 h-4" />
+                    <Icon className="w-5 h-5 flex-shrink-0" />
                     <div className="text-left">
-                      <div className="font-semibold text-sm">{phase.name}</div>
-                      <div className={`text-xs ${phase.active ? 'text-blue-100' : 'text-gray-400'}`}>
+                      <div className="font-semibold text-sm md:text-base">{phase.name}</div>
+                      <div className={`text-xs md:text-sm ${phase.active ? 'text-blue-100' : 'text-gray-400'}`}>
                         {phase.subtitle}
                       </div>
                     </div>
@@ -139,7 +139,7 @@ export default function MCPPreparePage() {
                     )}
                   </button>
                   {index < phases.length - 1 && (
-                    <ChevronRight className={`w-5 h-5 flex-shrink-0 ${phase.active ? 'text-blue-400' : 'text-gray-300'}`} />
+                    <ChevronRight className={`w-5 h-5 flex-shrink-0 md:hidden ${phase.active ? 'text-blue-400' : 'text-gray-300'}`} />
                   )}
                 </React.Fragment>
               );
