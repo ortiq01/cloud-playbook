@@ -6,6 +6,8 @@ These instructions are for GitHub Copilot (coding agent) when modifying this rep
 
 Keep the MCP onboarding page consistent, easy to maintain, and safe to change.
 
+Ensure the functionality can be converted to SharePoint functionality (e.g., implemented as a SharePoint page with web parts) without major rework.
+
 ## Where things live
 
 - `src/appConfig.js` is the source of truth for:
