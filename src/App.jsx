@@ -27,13 +27,13 @@ export default function MCPPreparePage() {
     },
     plan: {
       intakeKickoff: false,
-      classifyWorkload: false,
-      stakeholders: false,
-      appInventory: false,
-      readinessAssessment: false,
-      targetArchitecture: false,
-      wayOfWorking: false,
-      asaDraft: false
+      confirmStakeholdersOwnership: false,
+      gatherAppRequirementsDesign: false,
+      alignPoa: false,
+      createInitialSolutionDesign: false,
+      approveInitialSolutionArchitecture: false,
+      determineScopeImpact: false,
+      alignPlanningWithProductOwner: false
     },
     build: {
       designApproved: false,
@@ -305,29 +305,24 @@ export default function MCPPreparePage() {
         {
           title: 'Intake Requirements',
           items: [
-            { key: 'intakeKickoff', label: 'Schedule intake kickoff', time: '30 min' },
-            { key: 'stakeholders', label: 'Confirm stakeholders & ownership (RACI)', time: '20 min' },
-            { key: 'appInventory', label: 'Provide app inventory & dependencies', time: '45 min' }
-          ]
-        },
-        {
-          title: 'Readiness Assessment',
-          items: [
-            { key: 'classifyWorkload', label: 'Complete workload classification', time: '15 min' },
-            { key: 'readinessAssessment', label: 'Run readiness assessment & log gaps', time: '60 min' }
+            { key: 'intakeKickoff', label: 'Schedule intake Kickoff', time: '30 min' },
+            { key: 'confirmStakeholdersOwnership', label: 'Confirm stakeholders & ownership', time: '20 min' },
+            { key: 'gatherAppRequirementsDesign', label: 'Gather application requirements (design)', time: '45 min' }
           ]
         },
         {
           title: 'Initial Solution Design',
           items: [
-            { key: 'targetArchitecture', label: 'Agree initial target architecture', time: '60 min' }
+            { key: 'alignPoa', label: 'Align PoA', time: '30 min' },
+            { key: 'createInitialSolutionDesign', label: 'Create initial solution design', time: '60 min' },
+            { key: 'approveInitialSolutionArchitecture', label: 'Approval on initial solution architecture', time: 'Varies' }
           ]
         },
         {
-          title: 'Way of Working & ASA',
+          title: 'Way of Working',
           items: [
-            { key: 'wayOfWorking', label: 'Align ceremonies & decision points', time: '30 min' },
-            { key: 'asaDraft', label: 'Draft ASA baseline (support + targets)', time: '45 min' }
+            { key: 'determineScopeImpact', label: 'Determine scope and impact', time: '30 min' },
+            { key: 'alignPlanningWithProductOwner', label: 'Align planning with Product Owner', time: '20 min' }
           ]
         }
       ],
