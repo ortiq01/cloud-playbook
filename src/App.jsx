@@ -12,7 +12,10 @@ export default function MCPPreparePage() {
   const [activeRole, setActiveRole] = useState(null);
   const defaultSectionByPhase = {
     prepare: 'what-is-mcp',
-    plan: 'intake-requirements'
+    plan: 'intake-requirements',
+    build: 'solution-design',
+    deliver: 'go-live-readiness',
+    run: 'operate'
   };
   const [activeSection, setActiveSection] = useState(defaultSectionByPhase.prepare);
   const [checklists, setChecklists] = useState({
@@ -31,6 +34,25 @@ export default function MCPPreparePage() {
       targetArchitecture: false,
       wayOfWorking: false,
       asaDraft: false
+    },
+    build: {
+      designApproved: false,
+      securityControlsReady: false,
+      deploymentReadiness: false,
+      observabilityBaseline: false
+    },
+    deliver: {
+      goLiveChecklist: false,
+      changeRecordReady: false,
+      cabSecurityApproved: false,
+      cutoverRollbackPlan: false,
+      operationalHandover: false
+    },
+    run: {
+      onCallReady: false,
+      monitoringAlertsLive: false,
+      incidentRunbookReady: false,
+      handoverComplete: false
     }
   });
 
@@ -58,6 +80,9 @@ export default function MCPPreparePage() {
       focus: ['Intake & ownership', 'Cost model & budgets', 'Operational readiness'],
       prepareTopics: ['What is MCP', 'Cost Management', 'Intake Process'],
       planTopics: ['Intake Requirements', 'Readiness Assessment', 'ASA (Service Agreement)'],
+      buildTopics: ['Plan Pack review', 'Go-live criteria', 'Operational handover prep'],
+      deliverTopics: ['CAB / Change record', 'Go-live checklist', 'Operational handover'],
+      runTopics: ['Service ownership', 'On-call & support', 'FinOps & reporting'],
       phases: ['Prepare', 'Plan', 'Run']
     },
     {
@@ -70,6 +95,9 @@ export default function MCPPreparePage() {
       focus: ['Solution design', 'NFRs & compliance', 'TenneT patterns'],
       prepareTopics: ['Cloud Playbook', 'Landing Zones', 'Security Standards'],
       planTopics: ['Solution Design', 'NFRs & Compliance', 'Dependency Mapping'],
+      buildTopics: ['Architecture sign-off', 'Security controls', 'Operational NFRs'],
+      deliverTopics: ['Change impact & risk', 'Cutover/rollback plan', 'Handover completeness'],
+      runTopics: ['Continuous improvement', 'Problem management', 'Resilience review'],
       phases: ['Prepare', 'Plan', 'Build']
     },
     {
@@ -82,6 +110,9 @@ export default function MCPPreparePage() {
       focus: ['IaC & CI/CD', 'GitLab pipelines', 'Deployment patterns'],
       prepareTopics: ['GitLab Setup', 'Terraform Templates', 'Naming Conventions'],
       planTopics: ['Inventory & Pipelines', 'Readiness Gaps', 'Observability Baseline'],
+      buildTopics: ['Deployment readiness', 'Observability baseline', 'Release approach'],
+      deliverTopics: ['Cutover execution', 'Rollback readiness', 'Operational handover'],
+      runTopics: ['Monitoring & alerting', 'Incident response', 'Runbook maintenance'],
       phases: ['Prepare', 'Build', 'Deliver', 'Run']
     }
   ];
@@ -335,6 +366,343 @@ export default function MCPPreparePage() {
         secondaryLabel: 'Go to Phase 2: Build',
         onSecondary: () => setPhase('build')
       }
+    },
+    build: {
+      hero: {
+        phaseLabel: 'Phase 2 – Build & Readiness',
+        title: '2. Build – Prepare for a Controlled Go-Live',
+        subtitle: 'Validate design readiness, confirm controls, and ensure the basics are in place so Go-Live is a controlled change with low risk.',
+        primaryCta: { label: 'Review build readiness', icon: CheckCircle2 },
+        secondaryCta: { label: 'Back to Phase 1: Plan', icon: ArrowRight, onClick: () => setPhase('plan') }
+      },
+      roleTipTitle: (roleTitle) => `Recommended for ${roleTitle}s in Build phase:`,
+      sections: [
+        {
+          id: 'solution-design',
+          title: 'Solution Design Sign-off',
+          icon: Building2,
+          content: {
+            description: 'Confirm the approved design is complete and aligned with standards before scheduling Go-Live activities.',
+            keyPoints: [
+              'Architecture decision records are complete and approved',
+              'NFRs are agreed (availability, RTO/RPO, performance, security)',
+              'Interfaces and dependencies are documented',
+              'Go-live criteria are clear and measurable'
+            ],
+            hasVideo: false
+          }
+        },
+        {
+          id: 'controls',
+          title: 'Controls & Compliance Readiness',
+          icon: Shield,
+          content: {
+            description: 'Verify essential security/compliance controls are ready for production use.',
+            keyPoints: [
+              'Access model and privileged access approach is defined',
+              'Logging and audit expectations are met',
+              'Data handling and classification constraints are respected',
+              'Risk items have owners and mitigation dates'
+            ],
+            hasVideo: false
+          }
+        },
+        {
+          id: 'deployment',
+          title: 'Deployment Readiness',
+          icon: Settings,
+          content: {
+            description: 'Ensure the standard platform components are usable for your workload and the deployment approach is repeatable.',
+            keyPoints: [
+              'Release approach is agreed (phased rollout / canary where applicable)',
+              'Environments and promotions are defined',
+              'Backout approach is understood',
+              'Known limitations are documented and accepted'
+            ],
+            hasVideo: false
+          }
+        },
+        {
+          id: 'observability',
+          title: 'Observability Baseline',
+          icon: MessageSquare,
+          content: {
+            description: 'Set up a minimum baseline for monitoring and alerting so Go-Live is observable and supportable.',
+            keyPoints: [
+              'Golden signals / KPIs are defined',
+              'Alerts are actionable and routed',
+              'Dashboards support Go-Live monitoring',
+              'Operational documentation is accessible'
+            ],
+            hasVideo: false
+          }
+        }
+      ],
+      quickActions: [
+        { icon: FileText, label: 'Build Readiness', desc: 'Confirm go-live criteria', color: 'bg-blue-500' },
+        { icon: Shield, label: 'Controls Check', desc: 'Security & compliance', color: 'bg-emerald-500' },
+        { icon: Settings, label: 'Release Approach', desc: 'Deployment readiness', color: 'bg-purple-500' },
+        { icon: MessageSquare, label: 'Observability', desc: 'Dashboards & alerts', color: 'bg-orange-500' }
+      ],
+      checklistTitle: 'Your Build Checklist',
+      checklistItems: [
+        { key: 'designApproved', label: 'Design sign-off complete', time: '30–60 min' },
+        { key: 'securityControlsReady', label: 'Security / compliance controls ready', time: '30–60 min' },
+        { key: 'deploymentReadiness', label: 'Deployment readiness confirmed', time: '20–40 min' },
+        { key: 'observabilityBaseline', label: 'Observability baseline in place', time: '20–40 min' }
+      ],
+      readyCallout: {
+        title: 'Ready for Phase 3!',
+        buttonLabel: 'Start Deliver phase →',
+        onClick: () => setPhase('deliver')
+      },
+      quickLinks: [
+        { icon: Building2, label: 'Architecture patterns', color: 'text-emerald-600' },
+        { icon: Shield, label: 'Security & compliance', color: 'text-red-600' },
+        { icon: Settings, label: 'Release readiness checklist', color: 'text-blue-600' },
+        { icon: MessageSquare, label: 'Observability standards', color: 'text-purple-600' },
+        { icon: FileText, label: 'Operational handover template', color: 'text-orange-600' },
+        { icon: DollarSign, label: 'FinOps essentials', color: 'text-green-600' }
+      ],
+      help: {
+        personName: 'MCP Enablement',
+        personSubtitle: 'Build phase – readiness & controls',
+        officeHours: 'Office Hours: Tuesdays 14:00',
+        teamsChannel: 'Teams: #mcp-enablement',
+        buttonLabel: 'Request Support'
+      },
+      footer: {
+        title: 'Build sets up a smooth Go-Live.',
+        subtitle: 'Complete the Build checklist to move into a controlled Deliver phase.',
+        primaryLabel: 'Open readiness checklist',
+        secondaryLabel: 'Go to Phase 3: Deliver',
+        onSecondary: () => setPhase('deliver')
+      }
+    },
+    deliver: {
+      hero: {
+        phaseLabel: 'Phase 3 – Go-Live, Approvals & Handover',
+        title: '3. Deliver – Controlled Go-Live and Operational Handover',
+        subtitle: 'Focus on cutover, approvals (CAB/security), and a clean handover so the service is supportable from day one.',
+        primaryCta: { label: 'Open Go-Live checklist', icon: Rocket },
+        secondaryCta: { label: 'Back to Phase 2: Build', icon: ArrowRight, onClick: () => setPhase('build') }
+      },
+      roleTipTitle: (roleTitle) => `Recommended for ${roleTitle}s in Deliver phase:`,
+      sections: [
+        {
+          id: 'go-live-readiness',
+          title: 'Go-Live Readiness (Minimum Gate)',
+          icon: CheckCircle2,
+          content: {
+            description: 'Confirm the minimal go-live gate is met so the change is controlled and measurable.',
+            keyPoints: [
+              'Go-live criteria and success metrics are agreed',
+              'Operational contacts and escalation paths are known',
+              'Monitoring is in place for go-live day',
+              'Known risks are documented with owners'
+            ],
+            hasVideo: false
+          }
+        },
+        {
+          id: 'change-approvals',
+          title: 'Change Record, CAB & Security Approvals',
+          icon: Shield,
+          content: {
+            description: 'Handle the formal change and approval steps (CAB/security) with a clear plan and risk picture.',
+            keyPoints: [
+              'Change record includes scope, timing, impacts, and rollback',
+              'Evidence for approvals is prepared and accessible',
+              'Stakeholders are informed and aligned on execution window',
+              'Approval outcomes are captured'
+            ],
+            hasVideo: false
+          }
+        },
+        {
+          id: 'cutover',
+          title: 'Cutover & Rollback Plan',
+          icon: ArrowRight,
+          content: {
+            description: 'Prepare a practical execution plan for the cutover window and a rollback plan that can actually be executed.',
+            keyPoints: [
+              'Step-by-step cutover runbook with owners and timings',
+              'Validation steps and acceptance criteria',
+              'Rollback decision points and procedure',
+              'Communication plan during the window'
+            ],
+            hasVideo: false
+          }
+        },
+        {
+          id: 'handover',
+          title: 'Operational Handover',
+          icon: Users,
+          content: {
+            description: 'Complete operational handover so Run can operate confidently without tribal knowledge.',
+            keyPoints: [
+              'Runbooks and support model are available and current',
+              'SLAs / ASA expectations are understood',
+              'Monitoring ownership and alert routing is agreed',
+              'Post go-live follow-ups are scheduled'
+            ],
+            hasVideo: false
+          }
+        }
+      ],
+      quickActions: [
+        { icon: FileText, label: 'Change Record', desc: 'Prepare CAB evidence', color: 'bg-blue-500' },
+        { icon: Calendar, label: 'Schedule CAB', desc: 'Pick the window', color: 'bg-emerald-500' },
+        { icon: Shield, label: 'Security Review', desc: 'Approval inputs', color: 'bg-purple-500' },
+        { icon: Users, label: 'Handover Pack', desc: 'Ops-ready docs', color: 'bg-orange-500' }
+      ],
+      checklistTitle: 'Your Deliver Checklist',
+      checklistItems: [
+        { key: 'goLiveChecklist', label: 'Go-Live checklist complete', time: '20–40 min' },
+        { key: 'changeRecordReady', label: 'Change record ready (scope, impact, rollback)', time: '30–60 min' },
+        { key: 'cabSecurityApproved', label: 'CAB / security approvals completed', time: 'Varies' },
+        { key: 'cutoverRollbackPlan', label: 'Cutover + rollback plan reviewed', time: '30–60 min' },
+        { key: 'operationalHandover', label: 'Operational handover done', time: '30–60 min' }
+      ],
+      readyCallout: {
+        title: 'Go-Live Complete!',
+        buttonLabel: 'Go to Phase 4: Run →',
+        onClick: () => setPhase('run')
+      },
+      quickLinks: [
+        { icon: FileText, label: 'Go-Live checklist', color: 'text-blue-600' },
+        { icon: Shield, label: 'CAB / security evidence list', color: 'text-red-600' },
+        { icon: Users, label: 'Operational handover template', color: 'text-emerald-600' },
+        { icon: MessageSquare, label: 'Go-Live comms template', color: 'text-purple-600' },
+        { icon: Clock, label: 'Cutover window guidance', color: 'text-orange-600' },
+        { icon: DollarSign, label: 'Cost baseline (FinOps)', color: 'text-green-600' }
+      ],
+      help: {
+        personName: 'MCP Enablement',
+        personSubtitle: 'Deliver phase – Go-Live & handover',
+        officeHours: 'Office Hours: Tuesdays 14:00',
+        teamsChannel: 'Teams: #mcp-enablement',
+        buttonLabel: 'Request Go-Live Support'
+      },
+      footer: {
+        title: 'Deliver is about control and clarity.',
+        subtitle: 'Complete approvals and handover so Run can operate confidently.',
+        primaryLabel: 'Open Go-Live checklist',
+        secondaryLabel: 'Go to Phase 4: Run',
+        onSecondary: () => setPhase('run')
+      }
+    },
+    run: {
+      hero: {
+        phaseLabel: 'Phase 4 – Operate & Improve',
+        title: '4. Run – Operate with Confidence',
+        subtitle: 'Run focuses on steady operations: monitoring, incident response, ownership clarity, and continuous improvement.',
+        primaryCta: { label: 'Review operating model', icon: Lightbulb },
+        secondaryCta: { label: 'Back to Phase 3: Deliver', icon: ArrowRight, onClick: () => setPhase('deliver') }
+      },
+      roleTipTitle: (roleTitle) => `Recommended for ${roleTitle}s in Run phase:`,
+      sections: [
+        {
+          id: 'operate',
+          title: 'Operating Model & Ownership',
+          icon: Briefcase,
+          content: {
+            description: 'Clarify who owns what: service ownership, support expectations, and escalation.',
+            keyPoints: [
+              'Primary/secondary contacts are defined',
+              'Support hours and escalation are clear',
+              'Change process expectations are understood',
+              'Operational KPIs are agreed'
+            ],
+            hasVideo: false
+          }
+        },
+        {
+          id: 'monitoring',
+          title: 'Monitoring, Alerts & Dashboards',
+          icon: MessageSquare,
+          content: {
+            description: 'Make sure monitoring and alerting stay useful after Go-Live.',
+            keyPoints: [
+              'Alerts are actionable (avoid noise)',
+              'Dashboards support day-to-day operations',
+              'Ownership for alert routing is maintained',
+              'Operational reporting cadence is set'
+            ],
+            hasVideo: false
+          }
+        },
+        {
+          id: 'incident',
+          title: 'Incident Response & Runbooks',
+          icon: HelpCircle,
+          content: {
+            description: 'Ensure runbooks and incident routines are in place for predictable response.',
+            keyPoints: [
+              'Runbooks exist for critical failure modes',
+              'On-call / escalation path is tested',
+              'Post-incident follow-up process is defined',
+              'Lessons learned feed improvements'
+            ],
+            hasVideo: false
+          }
+        },
+        {
+          id: 'improve',
+          title: 'Continuous Improvement',
+          icon: Target,
+          content: {
+            description: 'Operational maturity increases over time: tune alerts, improve resilience, and reduce toil.',
+            keyPoints: [
+              'Regular service review cadence',
+              'Backlog for reliability improvements',
+              'Cost baseline and optimization actions',
+              'Documentation stays current'
+            ],
+            hasVideo: false
+          }
+        }
+      ],
+      quickActions: [
+        { icon: Users, label: 'Support Model', desc: 'Ownership & contacts', color: 'bg-blue-500' },
+        { icon: MessageSquare, label: 'Dashboards', desc: 'Daily operations', color: 'bg-emerald-500' },
+        { icon: HelpCircle, label: 'Incident Playbook', desc: 'Runbooks & response', color: 'bg-purple-500' },
+        { icon: Target, label: 'Service Review', desc: 'Improve over time', color: 'bg-orange-500' }
+      ],
+      checklistTitle: 'Your Run Checklist',
+      checklistItems: [
+        { key: 'onCallReady', label: 'On-call / escalation path confirmed', time: '15–30 min' },
+        { key: 'monitoringAlertsLive', label: 'Monitoring & alert routing verified', time: '15–30 min' },
+        { key: 'incidentRunbookReady', label: 'Incident runbook available', time: '20–40 min' },
+        { key: 'handoverComplete', label: 'Handover acknowledged by operations', time: '10–20 min' }
+      ],
+      readyCallout: {
+        title: 'Operating baseline in place!',
+        buttonLabel: 'Revisit the journey →',
+        onClick: () => setPhase('prepare')
+      },
+      quickLinks: [
+        { icon: MessageSquare, label: 'Monitoring standards', color: 'text-purple-600' },
+        { icon: HelpCircle, label: 'Incident management', color: 'text-red-600' },
+        { icon: DollarSign, label: 'FinOps and cost reporting', color: 'text-green-600' },
+        { icon: FileText, label: 'Runbook templates', color: 'text-blue-600' },
+        { icon: Users, label: 'Support model & RACI', color: 'text-emerald-600' },
+        { icon: Target, label: 'Service review checklist', color: 'text-orange-600' }
+      ],
+      help: {
+        personName: 'MCP Enablement',
+        personSubtitle: 'Run phase – operations & improvement',
+        officeHours: 'Office Hours: Tuesdays 14:00',
+        teamsChannel: 'Teams: #mcp-enablement',
+        buttonLabel: 'Ask for Help'
+      },
+      footer: {
+        title: 'Run is where value is sustained.',
+        subtitle: 'Keep ownership, monitoring, and runbooks healthy over time.',
+        primaryLabel: 'Open operating model',
+        secondaryLabel: 'Back to Prepare',
+        onSecondary: () => setPhase('prepare')
+      }
     }
   };
 
@@ -355,8 +723,8 @@ export default function MCPPreparePage() {
   const checklist = checklists[activePhase] ?? {};
 
   const getPhaseChecklistKeys = () => {
-    if (activePhase === 'prepare') return currentConfig.checklistItems.map(i => i.key);
     if (activePhase === 'plan') return currentConfig.checklistGroups.flatMap(g => g.items.map(i => i.key));
+    if (currentConfig.checklistItems) return currentConfig.checklistItems.map(i => i.key);
     return Object.keys(checklist);
   };
 
@@ -364,8 +732,16 @@ export default function MCPPreparePage() {
   const completedItems = phaseChecklistKeys.filter((k) => Boolean(checklist[k])).length;
   const totalItems = Math.max(phaseChecklistKeys.length, 1);
   const selectedRole = roles.find(r => r.id === activeRole);
+  const topicKeyByPhase = {
+    prepare: 'prepareTopics',
+    plan: 'planTopics',
+    build: 'buildTopics',
+    deliver: 'deliverTopics',
+    run: 'runTopics'
+  };
+
   const selectedRoleTopics = selectedRole
-    ? (activePhase === 'plan' ? selectedRole.planTopics : selectedRole.prepareTopics)
+    ? (selectedRole[topicKeyByPhase[activePhase]] ?? selectedRole.prepareTopics ?? [])
     : [];
 
   return (
