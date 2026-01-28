@@ -752,15 +752,17 @@ export function createPhaseConfig({ setPhase }) {
         },
         {
           id: 'improve',
-          title: 'Continuous Improvement',
+          title: 'Service Reviews',
           icon: Target,
           content: {
-            description: 'Operational maturity increases over time: tune alerts, improve resilience, and reduce toil.',
+            description:
+              'Service Reviews turn operations into continuous improvement. In monthly and quarterly reviews between TenneT and Capgemini, we review service performance, customer feedback, and operational lessons learned to prioritize improvements and keep MCP reliable, secure, and cost-effective.',
             keyPoints: [
-              'Regular service review cadence',
-              'Backlog for reliability improvements',
-              'Cost baseline and optimization actions',
-              'Documentation stays current'
+              'Monthly reviews: operational performance, incidents/trends, and quick-win improvements',
+              'Quarterly reviews: roadmap, recurring issues, and bigger improvement initiatives',
+              'Customer feedback loop: capture needs and prioritize changes that improve experience',
+              'Lessons learned: post-incident actions and operational learnings feed the backlog',
+              'KPIs & follow-up: agreed actions, owners, and measurable outcomes'
             ],
             hasVideo: false
           }
