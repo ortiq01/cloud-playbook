@@ -196,7 +196,7 @@ export function createPhaseConfig({ setPhase }) {
         },
         {
           id: 'education',
-          title: 'Cloud Education',
+          title: 'Education – Cloud, Topdesk & ITSM',
           icon: GraduationCap,
           content: {
             description:
