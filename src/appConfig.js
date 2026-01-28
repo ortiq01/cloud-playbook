@@ -762,6 +762,24 @@ export function createPhaseConfig({ setPhase }) {
           }
         },
         {
+          id: 'security-compliance',
+          title: 'Security & Compliance',
+          icon: Shield,
+          content: {
+            description:
+              'Operate securely by following the MCP security framework and keeping controls effective over time. This includes handling vulnerabilities with clear ownership and SLAs, validating risk with penetration testing where needed, and aligning evidence and practices with ISO 27001 expectations.',
+            keyPoints: [
+              'Security framework: baseline controls, guardrails, and secure-by-default patterns on MCP',
+              'Vulnerability management: scanning, remediation expectations, and verification before/after changes',
+              'Penetration testing: when required, how to request it, and how findings are tracked and closed',
+              'ISO alignment (ISO 27001): evidence, control effectiveness, and audit readiness for services'
+            ],
+            hasVideo: false,
+            documentationUrl: '',
+            resourcesUrl: ''
+          }
+        },
+        {
           id: 'improve',
           title: 'Continuous Improvement',
           icon: Target,
