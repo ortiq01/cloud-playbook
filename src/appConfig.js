@@ -714,21 +714,6 @@ export function createPhaseConfig({ setPhase }) {
           }
         },
         {
-          id: 'incident',
-          title: 'Incident Response & Runbooks',
-          icon: HelpCircle,
-          content: {
-            description: 'Ensure runbooks and incident routines are in place for predictable response.',
-            keyPoints: [
-              'Runbooks exist for critical failure modes',
-              'On-call / escalation path is tested',
-              'Post-incident follow-up process is defined',
-              'Lessons learned feed improvements'
-            ],
-            hasVideo: false
-          }
-        },
-        {
           id: 'finops',
           title: 'FinOps Practices',
           icon: DollarSign,
