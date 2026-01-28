@@ -136,12 +136,13 @@ export function createPhaseConfig({ setPhase }) {
           title: 'What is MCP?',
           icon: Play,
           content: {
-            description: "Understanding 'What is Cloud' is like knowing the terrain before a hike. Just as hikers need to be aware of the landscape and conditions ahead, it's important to grasp the basics of cloud technology.",
+            description:
+              "MCP (Managed Cloud Platform) is TenneT’s standardized, pre-configured cloud environment on Microsoft Azure. It was built by Capgemini for TenneT and is operated in partnership to provide a secure, compliant foundation (networking, identity, logging, and guardrails). This lets product teams provision workloads faster and focus on delivery instead of rebuilding cloud basics.",
             keyPoints: [
-              'What the cloud is and how it differs from on-premises',
-              'Difference between public and private cloud',
-              'How MCP services support your workload',
-              'What the platform provides vs. what you own'
+              "What MCP is at TenneT: a managed Azure platform foundation",
+              'What is standardized (guardrails, monitoring, networking) vs. what you build and operate',
+              'How MCP accelerates delivery through reusable, pre-approved patterns',
+              'Shared responsibility: platform team/provider vs. your product team'
             ],
             hasVideo: true,
             videoTitle: 'What is the cloud? An introduction to cloud computing with Microsoft Azure'
@@ -157,6 +158,22 @@ export function createPhaseConfig({ setPhase }) {
               'Platform Owner: BTO Operations, IIC Unit',
               'Managed Cloud Provider: Capgemini (Azure & GitLab)',
               'Enablement Team: Solutioning, coaching & onboarding'
+            ],
+            hasVideo: false
+          }
+        },
+        {
+          id: 'mcp-role',
+          title: 'What is the role of MCP?',
+          icon: Briefcase,
+          content: {
+            description:
+              'MCP helps application teams move faster on Azure by providing a secure, standardized foundation and clear ways of working. Depending on your needs, you can get a “white glove” onboarding experience via the Enablement team or use predefined, automated self-service capabilities to stay more autonomous.',
+            keyPoints: [
+              'What MCP provides: compliant landing zones, platform guardrails, and baseline observability',
+              'White glove enablement: coaching, onboarding, and solutioning support when needed',
+              'Self-service autonomy: reusable patterns and automated services to provision safely and consistently',
+              'Clarity on responsibilities: what the platform covers vs. what your team owns and operates'
             ],
             hasVideo: false
           }
@@ -220,7 +237,7 @@ export function createPhaseConfig({ setPhase }) {
         { icon: Shield, label: 'Security & Compliance', color: 'text-red-600' }
       ],
       topdeskRequests: [
-        { label: 'Request GitLab access', desc: 'User onboarding / permissions' },
+        { label: 'Request Cloud Access via OMADA', desc: 'User onboarding / permissions' },
         { label: 'Request subscription / landing zone', desc: 'If needed for onboarding' },
         { label: 'Request security onboarding', desc: 'Access + policy alignment' }
       ],
