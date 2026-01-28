@@ -27,7 +27,7 @@ export const defaultSectionByPhase = {
   plan: 'intake-requirements',
   build: 'solution-design',
   deliver: 'go-live-readiness',
-  run: 'operate'
+  run: 'mcp-ops-org'
 };
 
 export const initialChecklists = {
@@ -664,16 +664,18 @@ export function createPhaseConfig({ setPhase }) {
       roleTipTitle: (roleTitle) => `Recommended for ${roleTitle}s in Run phase:`,
       sections: [
         {
-          id: 'operate',
-          title: 'Operating Model & Ownership',
-          icon: Briefcase,
+          id: 'mcp-ops-org',
+          title: 'How MCP Operations is organised',
+          icon: Users,
           content: {
-            description: 'Clarify who owns what: service ownership, support expectations, and escalation.',
+            description:
+              'MCP operations follow a factory model that covers both Build and Run: Build focuses on delivering and evolving platform capabilities, while Run focuses on stability, support, and continuous improvement. Several teams work together to keep the platform secure, observable, and reliable for application teams.',
             keyPoints: [
-              'Primary/secondary contacts are defined',
-              'Support hours and escalation are clear',
-              'Change process expectations are understood',
-              'Operational KPIs are agreed'
+              'MCP Factory model: Build (platform delivery & change) and Run (operate, support, improve)',
+              'Operations team: day-to-day platform operations, platform support, and escalation handling',
+              'Observability team: monitoring standards, dashboards, alerting strategy, and telemetry improvements',
+              'Security teams: guardrails, compliance controls, vulnerability management, and security onboarding',
+              'Service Management: ITSM processes, change/incident/problem routines, and service reporting'
             ],
             hasVideo: false
           }
@@ -694,23 +696,6 @@ export function createPhaseConfig({ setPhase }) {
             hasVideo: false,
             documentationUrl: '',
             resourcesUrl: ''
-          }
-        },
-        {
-          id: 'mcp-ops-org',
-          title: 'How MCP Operations is organised',
-          icon: Users,
-          content: {
-            description:
-              'MCP operations follow a factory model that covers both Build and Run: Build focuses on delivering and evolving platform capabilities, while Run focuses on stability, support, and continuous improvement. Several teams work together to keep the platform secure, observable, and reliable for application teams.',
-            keyPoints: [
-              'MCP Factory model: Build (platform delivery & change) and Run (operate, support, improve)',
-              'Operations team: day-to-day platform operations, platform support, and escalation handling',
-              'Observability team: monitoring standards, dashboards, alerting strategy, and telemetry improvements',
-              'Security teams: guardrails, compliance controls, vulnerability management, and security onboarding',
-              'Service Management: ITSM processes, change/incident/problem routines, and service reporting'
-            ],
-            hasVideo: false
           }
         },
         {
