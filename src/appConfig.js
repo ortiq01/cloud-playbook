@@ -199,12 +199,13 @@ export function createPhaseConfig({ setPhase }) {
           title: 'Cloud Education',
           icon: GraduationCap,
           content: {
-            description: 'Build your cloud capabilities through role-based training paths. We encourage certification to demonstrate knowledge and enhance your skills.',
+            description:
+              'Build your cloud and operational capabilities with a mix of Azure fundamentals and TenneT ways of working. Start with Microsoft Learn (via ESI where available) for role-based learning paths, then learn the ITSM processes and Topdesk Self Service Portal (SSP) that support day-to-day delivery on MCP. These BTO-managed processes are owned by the QPM team.',
             keyPoints: [
-              'Enterprise Skilling Initiatives (ESI) platform',
-              'Role-based learning paths (AZ-900, AZ-104, AZ-305)',
-              'TenneT-specific patterns and standards training',
-              'Cloud Playbook deep-dives'
+              'Microsoft Learn learning paths for Azure fundamentals and role-based tracks (e.g., AZ-900 / AZ-104 / AZ-305)',
+              'Enterprise Skilling Initiatives (ESI): curated training and certification support',
+              'IT Service Management (ITSM) & IT Process Management: how services are requested, changed, and operated at TenneT',
+              'Topdesk Self Service Portal (SSP): how to find services and raise requests in the BTO process landscape (QPM owned)'
             ],
             hasVideo: false
           }
@@ -232,6 +233,8 @@ export function createPhaseConfig({ setPhase }) {
         { icon: BookOpen, label: 'Inner Source Documentation', color: 'text-blue-600' },
         { icon: FileText, label: 'Cloud Playbook', color: 'text-emerald-600' },
         { icon: GraduationCap, label: 'ESI Training Portal', color: 'text-purple-600' },
+        { icon: GraduationCap, label: 'Microsoft Learn (Azure Paths)', color: 'text-indigo-600' },
+        { icon: MessageSquare, label: 'Topdesk Self Service Portal (SSP)', color: 'text-sky-600' },
         { icon: GitBranch, label: 'GitLab Access Request', color: 'text-orange-600' },
         { icon: DollarSign, label: 'Cost Management (FinOps)', color: 'text-green-600' },
         { icon: Shield, label: 'Security & Compliance', color: 'text-red-600' }
