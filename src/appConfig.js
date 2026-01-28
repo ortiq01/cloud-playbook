@@ -744,6 +744,24 @@ export function createPhaseConfig({ setPhase }) {
           }
         },
         {
+          id: 'finops',
+          title: 'FinOps Practices',
+          icon: DollarSign,
+          content: {
+            description:
+              'Make cloud cost management part of normal operations. Use the FinOps framework to set good habits, review spend with the cloud financial dashboard, act on cost recommendations, and build capability through targeted training and certification.',
+            keyPoints: [
+              'FinOps Framework: principles and practices to manage cloud spend and value',
+              'Cloud financial dashboard: visibility into spend, trends, and allocation',
+              'Cloud cost recommendations: identify waste, rightsizing options, and optimization actions',
+              'Education & certification: role-based FinOps learning to build shared cost ownership'
+            ],
+            hasVideo: false,
+            documentationUrl: '',
+            resourcesUrl: ''
+          }
+        },
+        {
           id: 'improve',
           title: 'Continuous Improvement',
           icon: Target,
