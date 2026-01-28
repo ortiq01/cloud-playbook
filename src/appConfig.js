@@ -679,6 +679,24 @@ export function createPhaseConfig({ setPhase }) {
           }
         },
         {
+          id: 'service-manuals',
+          title: 'Service & Operations Manuals',
+          icon: FileText,
+          content: {
+            description:
+              'Use the MCP InnerSource knowledge base as the single place to understand platform services: what is provided, what is expected from your team, and how support and SLAs work. This is also where you can find (or reference) the DAP and the Application Service Agreement (ASA) that define agreements, expectations, and commercial/SLA details.',
+            keyPoints: [
+              'InnerSource service manuals: service catalog, expectations, SLAs, and support boundaries',
+              'Operations manuals: how services are operated (monitoring, runbooks, escalation, maintenance)',
+              'DAP reference: the approved design/decision set and operational agreements for your service',
+              'Application Service Agreement (ASA): SLA schedule, service expectations, and pricing annex'
+            ],
+            hasVideo: false,
+            documentationUrl: '',
+            resourcesUrl: ''
+          }
+        },
+        {
           id: 'mcp-ops-org',
           title: 'How MCP Operations is organised',
           icon: Users,

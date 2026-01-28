@@ -22,6 +22,11 @@ export default function MCPPreparePage() {
   const [activeSection, setActiveSection] = useState(defaultSectionByPhase.prepare);
   const [checklists, setChecklists] = useState(initialChecklists);
 
+  const openExternal = (url) => {
+    if (!url) return;
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
   const setPhase = (phaseId) => {
     setActivePhase(phaseId);
     setActiveSection(defaultSectionByPhase[phaseId] ?? defaultSectionByPhase.prepare);
@@ -333,11 +338,17 @@ export default function MCPPreparePage() {
                 </div>
 
                 <div className="mt-4 flex flex-wrap gap-2">
-                  <button className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 hover:bg-blue-700 transition-colors text-sm">
+                  <button
+                    onClick={() => openExternal(section.content.documentationUrl)}
+                    className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 hover:bg-blue-700 transition-colors text-sm"
+                  >
                     <ExternalLink className="w-4 h-4" />
                     Open documentation
                   </button>
-                  <button className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium flex items-center gap-2 hover:bg-gray-200 transition-colors text-sm">
+                  <button
+                    onClick={() => openExternal(section.content.resourcesUrl)}
+                    className="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg font-medium flex items-center gap-2 hover:bg-gray-200 transition-colors text-sm"
+                  >
                     <BookOpen className="w-4 h-4" />
                     Related resources
                   </button>
@@ -451,6 +462,7 @@ export default function MCPPreparePage() {
                 return (
                   <button
                     key={i}
+                    onClick={() => openExternal(link.url)}
                     className="w-full flex items-center gap-2.5 p-2.5 rounded-lg hover:bg-gray-50 transition-colors text-left group"
                   >
                     <LinkIcon className={`w-4 h-4 ${link.color}`} />
