@@ -700,15 +700,16 @@ export function createPhaseConfig({ setPhase }) {
         },
         {
           id: 'monitoring',
-          title: 'Monitoring, Alerts & Dashboards',
+          title: 'Monitoring & Alerts',
           icon: MessageSquare,
           content: {
-            description: 'Make sure monitoring and alerting stay useful after Go-Live.',
+            description:
+              'MCP uses Azure monitoring to keep platform services stable and operational. Signals (metrics, logs, and alerts) drive actionable insights, and key events can be forwarded automatically to ServiceNow so incidents and follow-up actions are tracked consistently. Where automation exists, this enables faster recovery and supports self-healing patterns for managed cloud resources.',
             keyPoints: [
-              'Alerts are actionable (avoid noise)',
-              'Dashboards support day-to-day operations',
-              'Ownership for alert routing is maintained',
-              'Operational reporting cadence is set'
+              'Azure monitoring: metrics, logs, alerts, and dashboards for platform and workloads',
+              'Event-to-ticket flow: automated events routed to ServiceNow for consistent handling',
+              'Actionable alerts: reduce noise, improve signal, and keep ownership for routing',
+              'Stability & recovery: automation and runbooks enable faster remediation and self-healing where available'
             ],
             hasVideo: false
           }
