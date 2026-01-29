@@ -137,9 +137,9 @@ export function createPhaseConfig({ setPhase }) {
           icon: Play,
           content: {
             description:
-              "MCP (Managed Cloud Platform) is TenneT’s standardized, pre-configured cloud environment on Microsoft Azure. It was built by Capgemini for TenneT and is operated in partnership to provide a secure, compliant foundation (networking, identity, logging, and guardrails). This lets product teams provision workloads faster and focus on delivery instead of rebuilding cloud basics.",
+              "MCP (Managed Cloud Platform) is our organisation’s standardized, pre-configured cloud environment on Microsoft Azure. It is built and operated in partnership to provide a secure, compliant foundation (networking, identity, logging, and guardrails). This lets product teams provision workloads faster and focus on delivery instead of rebuilding cloud basics.",
             keyPoints: [
-              "What MCP is at TenneT: a managed Azure platform foundation",
+              'What MCP is in our organisation: a managed Azure platform foundation',
               'What is standardized (guardrails, monitoring, networking) vs. what you build and operate',
               'How MCP accelerates delivery through reusable, pre-approved patterns',
               'Shared responsibility: platform team/provider vs. your product team'
@@ -179,17 +179,17 @@ export function createPhaseConfig({ setPhase }) {
           }
         },
         {
-          id: 'tennet-capgemini',
-          title: 'TenneT & Capgemini',
+          id: 'org-capgemini',
+          title: 'Our organisation & Capgemini',
           icon: Building2,
           content: {
-            description: 'Our partnership with Capgemini delivers Azure and GitLab platform services while TenneT maintains strategic ownership and governance.',
+            description: 'Our partnership with Capgemini delivers Azure and GitLab platform services while our organisation maintains strategic ownership and governance.',
             keyPoints: [
               'Capgemini: Platform operations & delivery',
-              'TenneT: Governance, architecture & standards',
+              'Our organisation: Governance, architecture & standards',
               'Enablement Team: Your bridge to both',
               'Application Service Agreement (ASA): SLA Schedule & Pricing Annex',
-              'MCP TenneT and Capgemini contract – Formal contract between TenneT and Capgemini/Sogeti'
+              'MCP contract – Formal contract between our organisation and Capgemini/Sogeti'
             ],
             hasVideo: false
           }
@@ -200,11 +200,11 @@ export function createPhaseConfig({ setPhase }) {
           icon: GraduationCap,
           content: {
             description:
-              'Build your cloud and operational capabilities with a mix of Azure fundamentals and TenneT ways of working. Start with Microsoft Learn (via ESI where available) for role-based learning paths, then learn the ITSM processes and Topdesk Self Service Portal (SSP) that support day-to-day delivery on MCP. These BTO-managed processes are owned by the QPM team.',
+              "Build your cloud and operational capabilities with a mix of Azure fundamentals and our organisation’s ways of working. Start with Microsoft Learn (via ESI where available) for role-based learning paths, then learn the ITSM processes and Topdesk Self Service Portal (SSP) that support day-to-day delivery on MCP. These BTO-managed processes are owned by the QPM team.",
             keyPoints: [
               'Microsoft Learn learning paths for Azure fundamentals and role-based tracks (e.g., AZ-900 / AZ-104 / AZ-305)',
               'Enterprise Skilling Initiatives (ESI): curated training and certification support',
-              'IT Service Management (ITSM) & IT Process Management: how services are requested, changed, and operated at TenneT',
+              'IT Service Management (ITSM) & IT Process Management: how services are requested, changed, and operated in our organisation',
               'Topdesk Self Service Portal (SSP): how to find services and raise requests in the BTO process landscape (QPM owned)'
             ],
             hasVideo: false
@@ -220,7 +220,7 @@ export function createPhaseConfig({ setPhase }) {
       checklistTitle: 'Your Prepare Checklist',
       checklistItems: [
         { key: 'video', label: 'Watch "What is Cloud" video', time: '5 min' },
-        { key: 'standards', label: 'Review TenneT Cloud Standards', time: '15 min' },
+        { key: 'standards', label: 'Review our organisation cloud standards', time: '15 min' },
         { key: 'training', label: 'Complete role-specific training', time: '1-2 hrs' },
         { key: 'register', label: 'Complete the Intake Form', time: '10 min' }
       ],
@@ -245,7 +245,7 @@ export function createPhaseConfig({ setPhase }) {
         { label: 'Request security onboarding', desc: 'Access + policy alignment' }
       ],
       help: {
-        personName: 'Lara',
+        personName: 'Enablement team',
         personSubtitle: 'Prepare & Run phases',
         officeHours: 'Office Hours: Tuesdays 14:00',
         teamsChannel: 'Teams: #mcp-enablement',
@@ -382,7 +382,7 @@ export function createPhaseConfig({ setPhase }) {
         { label: 'Architecture / review request', desc: 'If formal review is needed' }
       ],
       help: {
-        personName: 'Kelsey',
+        personName: 'Enablement team',
         personSubtitle: 'Plan phase – Intake & design',
         officeHours: 'Office Hours: Thursdays 10:00',
         teamsChannel: 'Teams: #mcp-plan-intake',
@@ -500,7 +500,7 @@ export function createPhaseConfig({ setPhase }) {
         { label: 'Observability setup request', desc: 'Dashboards / alert routing' }
       ],
       help: {
-        personName: 'MCP Enablement',
+        personName: 'Enablement team',
         personSubtitle: 'Build phase – readiness & controls',
         officeHours: 'Office Hours: Tuesdays 14:00',
         teamsChannel: 'Teams: #mcp-enablement',
@@ -638,7 +638,7 @@ export function createPhaseConfig({ setPhase }) {
         { label: 'DA approval request', desc: 'If required by governance' }
       ],
       help: {
-        personName: 'MCP Enablement',
+        personName: 'Enablement team',
         personSubtitle: 'Deliver phase – Go-Live & handover',
         officeHours: 'Office Hours: Tuesdays 14:00',
         teamsChannel: 'Teams: #mcp-enablement',
@@ -756,7 +756,7 @@ export function createPhaseConfig({ setPhase }) {
           icon: Target,
           content: {
             description:
-              'Service Reviews turn operations into continuous improvement. In monthly and quarterly reviews between TenneT and Capgemini, we review service performance, customer feedback, and operational lessons learned to prioritize improvements and keep MCP reliable, secure, and cost-effective.',
+              'Service Reviews turn operations into continuous improvement. In monthly and quarterly reviews between our organisation and Capgemini, we review service performance, customer feedback, and operational lessons learned to prioritize improvements and keep MCP reliable, secure, and cost-effective.',
             keyPoints: [
               'Monthly reviews: operational performance, incidents/trends, and quick-win improvements',
               'Quarterly reviews: roadmap, recurring issues, and bigger improvement initiatives',
@@ -800,7 +800,7 @@ export function createPhaseConfig({ setPhase }) {
         { label: 'Operational access change', desc: 'RBAC adjustments over time' }
       ],
       help: {
-        personName: 'MCP Enablement',
+        personName: 'Enablement team',
         personSubtitle: 'Run phase – operations & improvement',
         officeHours: 'Office Hours: Tuesdays 14:00',
         teamsChannel: 'Teams: #mcp-enablement',
